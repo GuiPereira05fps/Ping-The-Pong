@@ -1,0 +1,11 @@
+WIN_WIDTH = 600
+WIN_HEIGHT = 900
+
+# noinspection SpellCheckingInspection
+XAXIS_CENTER = 450
+
+# noinspection SpellCheckingInspection
+MENU_NEWGAME_BUTTON_YAXIS = 344
+MENU_CONTROLS_BUTTON_YAXIS = 427
+MENU_EXIT_BUTTON_YAXIS = 510
+
