@@ -13,22 +13,18 @@ class Menu:
     # Set menu background image
     def __init__(self, window):
         self.window = window
-        self.surf = pygame.image.load('assets/placeholder_BG_Menu.png')
+        self.surf = pygame.image.load('assets/menu_BG.png').convert_alpha()
         self.rect = self.surf.get_rect(left=0, top=0)
 
     # Play and loop soundtrack
     def run(self):
         selected_option = 0
         pygame.mixer_music.load("./assets/placeholder_Menu_Song.mp3")
+        pygame.mixer_music.set_volume(0.5)
         pygame.mixer_music.play(-1)
 
         while True:
             self.window.blit(source=self.surf, dest=self.rect)
-
-            title = self.load_menu_textimage(
-                './assets/placeholder_title.png',
-                XAXIS_CENTER,
-                5)
 
             newgame_path = (
                 './assets/menu_button_NewGameHL.png' if selected_option == 0
@@ -69,11 +65,11 @@ class Menu:
                     quit()
 
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_DOWN:
+                    if event.key in (pygame.K_DOWN, pygame.K_s):
                         selected_option = (selected_option + 1) % 3
-                    elif event.key == pygame.K_UP:
+                    elif event.key in (pygame.K_UP, pygame.K_w):
                         selected_option = (selected_option - 1) % 3
-                    elif event.key == pygame.K_RETURN:
+                    elif event.key in (pygame.K_RETURN, pygame.K_KP_ENTER):
                         return selected_option
 
     # Factory for menu text images

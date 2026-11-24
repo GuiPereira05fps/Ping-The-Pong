@@ -1,8 +1,9 @@
-WIN_WIDTH = 600
-WIN_HEIGHT = 900
+WIN_WIDTH = 900
+WIN_HEIGHT = 600
 
 # noinspection SpellCheckingInspection
 XAXIS_CENTER = 450
+YAXIS_CENTER = 300
 
 # noinspection SpellCheckingInspection
 MENU_NEWGAME_BUTTON_YAXIS = 344
