@@ -6,7 +6,7 @@ from xml.dom.minidom import Entity
 import pygame
 
 from code.EntityFactory import EntityFactory
-from code.Const import WIN_HEIGHT, WIN_WIDTH
+from code.Const import WIN_HEIGHT, WIN_WIDTH, PLAYERS_CENTERY, PLAYER1_X_AXIS, PLAYER2_X_AXIS, BALL_CENTER
 
 
 class Level:
@@ -15,9 +15,9 @@ class Level:
         self.surf = pygame.image.load("assets/level_BG.png")
         self.rect = self.surf.get_rect(left=0, top=0)
 
-        self.player1 = EntityFactory.get_entity("player1", (10, 252))
-        self.player2 = EntityFactory.get_entity("player2", (877, 252))
-        self.ball = EntityFactory.get_entity("ball", (((WIN_WIDTH / 2) - 7.5), (WIN_HEIGHT / 2) - 7.5))
+        self.player1 = EntityFactory.get_entity("player1", (PLAYER1_X_AXIS, PLAYERS_CENTERY))
+        self.player2 = EntityFactory.get_entity("player2", (PLAYER2_X_AXIS, PLAYERS_CENTERY))
+        self.ball = EntityFactory.get_entity("ball", BALL_CENTER)
 
         self.ball.players(self.player1, self.player2)
 
