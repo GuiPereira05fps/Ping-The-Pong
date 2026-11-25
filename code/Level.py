@@ -6,7 +6,7 @@ from xml.dom.minidom import Entity
 import pygame
 
 from code.EntityFactory import EntityFactory
-from code.Const import YAXIS_CENTER
+from code.Const import WIN_HEIGHT, WIN_WIDTH
 
 
 class Level:
@@ -14,8 +14,12 @@ class Level:
         self.window = window
         self.surf = pygame.image.load("assets/level_BG.png")
         self.rect = self.surf.get_rect(left=0, top=0)
-        self.player1 = EntityFactory.get_entity("player1", (20, 268))
-        self.player2 = EntityFactory.get_entity("player2", (860, 268))
+
+        self.player1 = EntityFactory.get_entity("player1", (10, 252))
+        self.player2 = EntityFactory.get_entity("player2", (877, 252))
+        self.ball = EntityFactory.get_entity("ball", (((WIN_WIDTH / 2) - 7.5), (WIN_HEIGHT / 2) - 7.5))
+
+        self.ball.players(self.player1, self.player2)
 
     def run(self):
         pygame.mixer_music.load('assets/placeholder_Level_Soundtrack.mp3')
@@ -30,6 +34,8 @@ class Level:
             self.player1.move()
             self.window.blit(source=self.player2.surf, dest=self.player2.rect)
             self.player2.move()
+            self.window.blit(source=self.ball.surf, dest=self.ball.rect)
+            self.ball.move()
 
             pygame.display.flip()
 
