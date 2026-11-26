@@ -10,6 +10,8 @@ class Player1(Entity):
         super().__init__(name, position)
         self.speed = 8
 
+    # Code duplication here and in Player2.
+    # To be reviewed and updated in future versions after release.
     def move(self, ):
         press_key = pygame.key.get_pressed()
         if press_key[pygame.K_w]:

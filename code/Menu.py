@@ -26,6 +26,8 @@ class Menu:
         while True:
             self.window.blit(source=self.surf, dest=self.rect)
 
+            # The [option]_path below allows menu buttons to be highlighted once focused with keyboard
+
             newgame_path = (
                 './assets/menu_button_NewGameHL.png' if selected_option == 0
                 else './assets/menu_button_NewGame.png'
@@ -64,6 +66,8 @@ class Menu:
                     pygame.quit()
                     quit()
 
+                # Don't EVER change the equation. %3 always results 0, 1 or 2 and keeps the
+                # menu selection working properly.
                 if event.type == pygame.KEYDOWN:
                     if event.key in (pygame.K_DOWN, pygame.K_s):
                         selected_option = (selected_option + 1) % 3
@@ -72,10 +76,9 @@ class Menu:
                     elif event.key in (pygame.K_RETURN, pygame.K_KP_ENTER):
                         return selected_option
 
-    # Factory for menu text images
+    # Constructor for menu text images
     def load_menu_textimage(self, image_path, center_x, y_axis):
         self.surf = pygame.image.load(image_path).convert_alpha()
         self.rect = self.surf.get_rect(centerx=center_x, top=y_axis)
         self.window.blit(source=self.surf, dest=self.rect)
-
         return self.surf, self.rect

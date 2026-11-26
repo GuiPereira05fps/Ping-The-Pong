@@ -5,7 +5,7 @@ import pygame
 from abc import ABC, abstractmethod
 
 
-class Entity(ABC):  # Constructor for Player and Ball
+class Entity(ABC):  # Constructor for players and Ball
     def __init__(self, name: str, position: tuple):
         self.name = name
         self.surf = pygame.image.load("assets/" + name + ".png").convert_alpha()

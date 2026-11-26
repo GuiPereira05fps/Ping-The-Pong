@@ -6,7 +6,7 @@ from xml.dom.minidom import Entity
 import pygame
 
 from code.EntityFactory import EntityFactory
-from code.Const import WIN_HEIGHT, WIN_WIDTH, PLAYERS_CENTERY, PLAYER1_X_AXIS, PLAYER2_X_AXIS, BALL_CENTER
+from code.Const import PLAYERS_CENTERY, PLAYER1_X_AXIS, PLAYER2_X_AXIS, BALL_CENTER
 
 
 class Level:
@@ -44,6 +44,7 @@ class Level:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     quit()
+                # Quits level by pressing Escape key
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         return

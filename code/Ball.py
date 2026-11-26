@@ -10,9 +10,13 @@ class Ball(Entity):
         super().__init__(name, position)
         self.player1 = None
         self.player2 = None
+        # Static speed resulting in the ball making the same bounces once in a while.
+        # Acceleration to be added in future versions after release.
         self.speed_x = 6
         self.speed_y = 6
 
+    # Simple maneuver to have ball and players collision working, but shouldn't be like this.
+    # To be reviewed and updated in future versions after release
     def players(self, player1, player2):
         self.player1 = player1
         self.player2 = player2

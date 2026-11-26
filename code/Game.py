@@ -28,6 +28,7 @@ class Game:
             elif menu_return == 1:
                 pass
             elif menu_return == 2:
+                # Funny song played once game quits
                 music_end_event = pygame.event.custom_type()
                 pygame.mixer.music.set_endevent(music_end_event)
                 pygame.mixer.music.load("./assets/quitting.mp3")
