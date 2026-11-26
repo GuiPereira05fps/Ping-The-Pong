@@ -13,22 +13,20 @@ class Menu:
     # Set menu background image
     def __init__(self, window):
         self.window = window
-        self.surf = pygame.image.load('assets/placeholder_BG_Menu.png')
+        self.surf = pygame.image.load('assets/menu_BG.png').convert_alpha()
         self.rect = self.surf.get_rect(left=0, top=0)
 
     # Play and loop soundtrack
     def run(self):
         selected_option = 0
         pygame.mixer_music.load("./assets/placeholder_Menu_Song.mp3")
+        pygame.mixer_music.set_volume(0.5)
         pygame.mixer_music.play(-1)
 
         while True:
             self.window.blit(source=self.surf, dest=self.rect)
 
-            title = self.load_menu_textimage(
-                './assets/placeholder_title.png',
-                XAXIS_CENTER,
-                5)
+            # The [option]_path below allows menu buttons to be highlighted once focused with keyboard
 
             newgame_path = (
                 './assets/menu_button_NewGameHL.png' if selected_option == 0
@@ -68,18 +66,19 @@ class Menu:
                     pygame.quit()
                     quit()
 
+                # Don't EVER change the equation. %3 always results 0, 1 or 2 and keeps the
+                # menu selection working properly.
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_DOWN:
+                    if event.key in (pygame.K_DOWN, pygame.K_s):
                         selected_option = (selected_option + 1) % 3
-                    elif event.key == pygame.K_UP:
+                    elif event.key in (pygame.K_UP, pygame.K_w):
                         selected_option = (selected_option - 1) % 3
-                    elif event.key == pygame.K_RETURN:
+                    elif event.key in (pygame.K_RETURN, pygame.K_KP_ENTER):
                         return selected_option
 
-    # Factory for menu text images
+    # Constructor for menu text images
     def load_menu_textimage(self, image_path, center_x, y_axis):
         self.surf = pygame.image.load(image_path).convert_alpha()
         self.rect = self.surf.get_rect(centerx=center_x, top=y_axis)
         self.window.blit(source=self.surf, dest=self.rect)
-
         return self.surf, self.rect
