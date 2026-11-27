@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import random
 from code.Entity import Entity
-from code.Const import WIN_HEIGHT, WIN_WIDTH, BALL_SPEED, TOP_BORDER_LIMITER, BOTTOM_BORDER_LIMITER
+from code.Const import WIN_HEIGHT, WIN_WIDTH, TOP_BORDER_LIMITER, BOTTOM_BORDER_LIMITER
 
 
 class Ball(Entity):
@@ -24,10 +24,15 @@ class Ball(Entity):
     def move(self):
         self.rect.x += self.speed_x
         self.rect.y += self.speed_y
-        if self.rect.top <= TOP_BORDER_LIMITER or self.rect.bottom >= BOTTOM_BORDER_LIMITER:
-            self.speed_y *= -1
-        if self.rect.left < 0 or self.rect.right > WIN_WIDTH:
-            self.speed_x *= -1
+
+        # Debugs ball going through screen broder by teleporting it to border limit and
+        # reversing its speed
+        if self.rect.top < TOP_BORDER_LIMITER:
+            self.rect.top = TOP_BORDER_LIMITER
+            self.speed_y = abs(self.speed_y)
+        elif self.rect.bottom > BOTTOM_BORDER_LIMITER:
+            self.rect.bottom = BOTTOM_BORDER_LIMITER
+            self.speed_y = -abs(self.speed_y)
 
         # Players collisions mechanic
         if self.rect.colliderect(self.player1) or self.rect.colliderect(self.player2):
@@ -35,4 +40,9 @@ class Ball(Entity):
 
     def restart(self):
         self.rect.center = (WIN_WIDTH / 2, WIN_HEIGHT / 2)
-        self.speed_x, self.speed_y = 0, 0
+        self.speed_x = 0
+        self.speed_y = 0
+
+    def serve(self):
+        self.speed_x = random.choice([-7, 7])
+        self.speed_y = random.choice([-7, 7])
