@@ -35,8 +35,12 @@ class Ball(Entity):
             self.speed_y = -abs(self.speed_y)
 
         # Players collisions mechanic
-        if self.rect.colliderect(self.player1) or self.rect.colliderect(self.player2):
-            self.speed_x *= -1
+        # Absolute values ensure ball is always going to the opposite direction and solves
+        # ball going through player glitch
+        if self.rect.colliderect(self.player1.rect):
+            self.speed_x = abs(self.speed_x)
+        elif self.rect.colliderect(self.player2.rect):
+            self.speed_x = -abs(self.speed_x)
 
     def restart(self):
         self.rect.center = (WIN_WIDTH / 2, WIN_HEIGHT / 2)
